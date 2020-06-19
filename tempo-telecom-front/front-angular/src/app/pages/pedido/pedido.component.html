@@ -1,3 +1,33 @@
+<div class="card" *ngFor="let pedido of listaPedidos">
+    <div class="row">
+        <div class="col">
+            Pedido {{pedido.id}} - {{pedido.cliente.nome}} ROMULO TOPSTER
+        </div>    
+        <div class="col">
+            {{pedido.data}} - {{pedido.hora}}
+        </div>
+    </div>
+    <div class="row table">
+        <table>
+            <tr>
+              <th>Id</th>
+              <th>Produto</th>
+              <th>Valor</th>
+            </tr>
+            <tr *ngFor="let produto of pedido.listaProdutos">
+              <td>{{produto.id}}</td>
+              <td>{{produto.nome}}</td>
+              <td>R$ {{produto.valor}}</td>
+            </tr>
+        </table>
+    </div>
+    <div class="row">
+        <div class="col">
+            Valor total: {{pedido.valor}}
+        </div>
+    </div>
+</div>
+
 <button (click)="abrirPaginaCadastro()">
     <span>Novo Pedido</span>
 </button>

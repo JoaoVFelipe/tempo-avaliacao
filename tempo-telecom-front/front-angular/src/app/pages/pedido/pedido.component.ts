@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { PedidosService } from 'src/app/services/pedidos.service';
+import { Pedido } from 'src/app/models/pedido';
 
 @Component({
   selector: 'app-pedido',
@@ -7,7 +9,17 @@ import { Router } from '@angular/router';
   styleUrls: ['pedido.component.css']
 })
 export class PedidoComponent {
-  constructor(private router: Router) {
+  listaPedidos: Pedido[];
+
+  constructor(private router: Router, private pedidoService: PedidosService) {
+    this.getPedidos();
+  }
+
+  // Chama o serviço para obter todos os clientes
+  getPedidos() {
+    this.pedidoService.getPedidos().subscribe((pedidos: Pedido[]) => {
+      this.listaPedidos = pedidos;
+    });
   }
 
   abrirPaginaCadastro(){

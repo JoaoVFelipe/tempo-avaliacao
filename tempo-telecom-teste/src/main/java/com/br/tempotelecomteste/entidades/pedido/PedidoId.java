@@ -7,14 +7,20 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class PedidoId implements Serializable {
+	private static final long serialVersionUID = -5472198536275111382L;
+	
 	@Column(name = "PEDIDO_ID")
 	private Long pedidoId;
 	@Column(name = "PRODUTO_ID")
 	private Long produtoId;
 	
+	 public PedidoId() {
+		 super();
+	 }
+	
 	 public PedidoId(Long pedidoId, Long produtoId) {
-		 	this.pedidoId = pedidoId;
-	        this.produtoId = produtoId;
+		 this.pedidoId = pedidoId;
+	     this.produtoId = produtoId;
 	 }
 
 	public Long getPedidoId() {

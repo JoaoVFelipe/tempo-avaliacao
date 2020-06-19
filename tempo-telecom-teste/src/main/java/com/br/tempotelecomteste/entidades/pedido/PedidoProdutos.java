@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
@@ -17,8 +18,11 @@ import com.br.tempotelecomteste.entidades.produto.Produto;
 @Table(name="PEDIDOS_X_PRODUTOS")
 public class PedidoProdutos implements Serializable{
 	
+	private static final long serialVersionUID = 8525990874292163619L;
+
 	@EmbeddedId
 	private PedidoId id;
+	
 	
     @MapsId("produtoId") //references EmbeddedId's property
     @JoinColumn(name="PRODUTO_ID", referencedColumnName = "id")
@@ -29,5 +33,40 @@ public class PedidoProdutos implements Serializable{
     @JoinColumn(name="PEDIDO_ID", referencedColumnName = "id")
     @ManyToOne
 	private Pedido pedidoId;
+    
+	
+	public PedidoProdutos() {
+		super();
+	}
+
+	public PedidoProdutos(PedidoId id) {
+		super();
+		this.id = id;
+	}
+
+	
+	public PedidoId getId() {
+		return id;
+	}
+
+	public void setId(PedidoId id) {
+		this.id = id;
+	}
+
+	public Produto getProdutoId() {
+		return produtoId;
+	}
+
+	public void setProdutoId(Produto produtoId) {
+		this.produtoId = produtoId;
+	}
+
+	public Pedido getPedidoId() {
+		return pedidoId;
+	}
+
+	public void setPedidoId(Pedido pedidoId) {
+		this.pedidoId = pedidoId;
+	}
 	
 }

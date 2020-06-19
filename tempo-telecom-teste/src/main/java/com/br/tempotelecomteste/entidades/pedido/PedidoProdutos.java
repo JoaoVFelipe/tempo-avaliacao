@@ -27,12 +27,12 @@ public class PedidoProdutos implements Serializable{
     @MapsId("produtoId") //references EmbeddedId's property
     @JoinColumn(name="PRODUTO_ID", referencedColumnName = "id")
     @ManyToOne
-	private Produto produtoId;
+	private Produto produto;
     
     @MapsId("pedidoId") //references EmbeddedId's property
     @JoinColumn(name="PEDIDO_ID", referencedColumnName = "id")
     @ManyToOne
-	private Pedido pedidoId;
+	private Pedido pedido;
     
 	
 	public PedidoProdutos() {
@@ -53,20 +53,20 @@ public class PedidoProdutos implements Serializable{
 		this.id = id;
 	}
 
-	public Produto getProdutoId() {
-		return produtoId;
+	public Produto getProduto() {
+		return produto;
 	}
 
-	public void setProdutoId(Produto produtoId) {
-		this.produtoId = produtoId;
+	public void setProduto(Produto produtoId) {
+		this.produto = produtoId;
 	}
 
-	public Pedido getPedidoId() {
-		return pedidoId;
+	public Pedido getPedido() {
+		return pedido;
 	}
 
-	public void setPedidoId(Pedido pedidoId) {
-		this.pedidoId = pedidoId;
+	public void setPedido(Pedido pedidoId) {
+		this.pedido = pedidoId;
 	}
 	
 }

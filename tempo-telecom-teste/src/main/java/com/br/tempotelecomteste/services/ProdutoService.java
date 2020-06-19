@@ -1,6 +1,7 @@
 package com.br.tempotelecomteste.services;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -19,5 +20,10 @@ public class ProdutoService {
 	@Transactional
 	public ArrayList<Produto> findAllProdutos() {
 		return (ArrayList<Produto>) repository.findAll();
+	}
+
+	public Optional<Produto> findById(Long id) {
+		return repository.findById(id);
+		
 	}
 }

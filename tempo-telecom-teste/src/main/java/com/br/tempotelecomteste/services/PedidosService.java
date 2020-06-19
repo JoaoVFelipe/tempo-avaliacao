@@ -7,6 +7,7 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
+import java.util.Optional;
 
 import javax.transaction.Transactional;
 
@@ -34,12 +35,19 @@ public class PedidosService {
 	@Autowired
 	PedidoProdutosRepository pedidoProdutosRepository;
 	
-	@Autowired
-	PedidoProdutosRepository pedidosProdutosRepository;
-
 	@Transactional
 	public ArrayList<Pedido> findAllPedidos() {
 		return (ArrayList<Pedido>) repository.findAll();
+	}
+	
+	@Transactional
+	public Optional<PedidoProdutos> findPedidoProdutoById(PedidoId id) {
+		return pedidoProdutosRepository.findById(id);
+	}
+	
+	@Transactional
+	public ArrayList<PedidoProdutos> findAllPedidosProdutos() {
+		return (ArrayList<PedidoProdutos>) pedidoProdutosRepository.findAll();
 	}
 	
 	@Transactional
@@ -54,8 +62,10 @@ public class PedidosService {
 		LocalTime nowTime = LocalTime.now();
 		pedido.setHora(String.valueOf(nowTime.getHour()) + ":" + String.valueOf(nowTime.getMinute()));
 		
+		pedido.setValor((Double) jsonPedido.get("valor"));
+		
 		ObjectMapper mapper = new ObjectMapper();
-		pedido.setClienteId(mapper.convertValue(jsonPedido.get("cliente"), Cliente.class));
+		pedido.setCliente(mapper.convertValue(jsonPedido.get("cliente"), Cliente.class));
 		return repository.save(pedido);
 	}
 	
@@ -72,8 +82,8 @@ public class PedidosService {
 			PedidoId pedidoId = new PedidoId(pedido.getId(), produto.getId());
 			
 			pedidoProdutos.setId(pedidoId);
-			pedidoProdutos.setPedidoId(pedido);
-			pedidoProdutos.setProdutoId(produto);
+			pedidoProdutos.setPedido(pedido);
+			pedidoProdutos.setProduto(produto);
 			
 			listPedidoProduto.add(pedidoProdutos);
 		});
@@ -81,4 +91,7 @@ public class PedidosService {
 		pedidoProdutosRepository.saveAll(listPedidoProduto);
 		
 	}
+
+
+
 }

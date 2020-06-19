@@ -1,6 +1,7 @@
 package com.br.tempotelecomteste.entidades.pedido;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -12,6 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.br.tempotelecomteste.entidades.cliente.Cliente;
 import com.br.tempotelecomteste.entidades.produto.Produto;
@@ -26,13 +28,19 @@ public class Pedido implements Serializable{
 	
 	@ManyToOne
 	@JoinColumn(name = "CLIENTE_ID")
-	private Cliente clienteId;
+	private Cliente cliente;
 	
 	@Column(name= "DATA")
 	private Date data;
 	
 	@Column(name= "HORA")
 	private String hora;
+	
+	@Column(name= "VALOR")
+	private Double valor;
+	
+	@Transient
+	private ArrayList<Produto> listaProdutos;
 
 	public Long getId() {
 		return id;
@@ -42,12 +50,12 @@ public class Pedido implements Serializable{
 		this.id = id;
 	}
 
-	public Cliente getClienteId() {
-		return clienteId;
+	public Cliente getCliente() {
+		return cliente;
 	}
 
-	public void setClienteId(Cliente clienteId) {
-		this.clienteId = clienteId;
+	public void setCliente(Cliente clienteId) {
+		this.cliente = clienteId;
 	}
 
 	public Date getData() {
@@ -64,6 +72,22 @@ public class Pedido implements Serializable{
 
 	public void setHora(String hora) {
 		this.hora = hora;
+	}
+
+	public Double getValor() {
+		return valor;
+	}
+
+	public void setValor(Double valor) {
+		this.valor = valor;
+	}
+
+	public ArrayList<Produto> getListaProdutos() {
+		return listaProdutos;
+	}
+
+	public void setListaProdutos(ArrayList<Produto> listaProdutos) {
+		this.listaProdutos = listaProdutos;
 	}
 	
 	

@@ -21,8 +21,7 @@ import com.br.tempotelecomteste.entidades.produto.Produto;
 @Table(name="PEDIDOS")
 public class Pedido implements Serializable{
 	@Id
-	@GeneratedValue(generator="pedido_gen")
-	@SequenceGenerator(name="pedido_gen",sequenceName="PEDIDO_ID_SEQ")
+	@GeneratedValue
 	private Long id;
 	
 	@ManyToOne

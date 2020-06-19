@@ -1,0 +1,22 @@
+  
+  <h2>Selecione o Pais: </h2>
+  
+
+    <select [(ngModel)]="clientePedido">
+        <option>Selecione um cliente: </option>
+        <option *ngFor="let cliente of clientesList" [ngValue]="cliente">{{cliente.nome}}</option>
+    </select>
+
+    <select [(ngModel)]="produtoSelecionado">
+        <option>Selecione um produto: </option>
+        <option *ngFor="let produto of produtoList" [ngValue]="produto">{{produto.nome}}</option>
+    </select>
+
+    <button (click)="adicionarProduto()">Adicionar Produto</button>
+
+    <input type="text"  [(ngModel)]="valorPedido" disabled/>
+
+    <button (click)="cadastrarPedido()">Adicionar Pedido</button>
+
+  
+   

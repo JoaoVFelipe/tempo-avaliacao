@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-pedido',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['pedido.component.css']
 })
 export class PedidoComponent {
-  constructor() {
+  constructor(private router: Router) {
+  }
+
+  abrirPaginaCadastro(){
+    this.router.navigate(['/pedidos/cadastro'])
   }
 }

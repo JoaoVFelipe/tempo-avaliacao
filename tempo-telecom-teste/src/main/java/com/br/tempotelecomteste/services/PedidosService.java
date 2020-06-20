@@ -93,7 +93,7 @@ public class PedidosService {
 			
 			//Busca hora atual do sistema e a formata
 			LocalTime nowTime = LocalTime.now();
-			pedido.setHora(String.valueOf(nowTime.getHour()) + ":" + String.valueOf(nowTime.getMinute()));
+			pedido.setHora(String.valueOf(nowTime).substring(0, 5));
 			
 			//Seta valor
 			pedido.setValor(Double.valueOf(String.valueOf(jsonPedido.get("valor"))));

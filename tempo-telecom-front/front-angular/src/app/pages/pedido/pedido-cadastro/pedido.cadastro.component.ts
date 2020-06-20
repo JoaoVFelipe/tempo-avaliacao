@@ -84,6 +84,7 @@ export class PedidoCadastroComponent implements OnInit{
       (pedido) => {
         if(pedido != null){
           this.showSucessBar();
+          this.limpaPedido();
         }
         else{
           this.showErroBar("Erro ao tentar salvar o pedido. Verifique os campos e tente novamente");
@@ -94,11 +95,16 @@ export class PedidoCadastroComponent implements OnInit{
   }
 
   cancelarCadastro(){
+    this.limpaPedido();
+    this.router.navigate(['/pedidos'])
+  }
+
+  limpaPedido(){
     this.clientePedido = null;
     this.produtoListPedido = [];
     this.valorPedido = 0;
-    this.router.navigate(['/pedidos'])
   }
+
 
   showSucessBar(){
     this.dismissErro();

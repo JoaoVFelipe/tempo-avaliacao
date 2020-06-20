@@ -1,9 +1,47 @@
+<h2>Cadastro de Clientes</h2>
+
+<!-- Alerts -->
+<div class="alert" *ngIf="showErro">
+    <span class="closebtn" (click)="dismissErro()">&times;</span>
+    <strong>Ocorreu um erro!</strong> {{erroDetalhe}} 
+  </div>
+  
+  <div class="alert success" *ngIf="showSucess">
+    <span class="closebtn" (click)="dismissSucesso()">&times;</span>  
+    <strong>OK!</strong> Cliente salvo com sucesso!
+  </div>
+<!-- Alerts -->
+
 <div>
-    Nome: <input type="text"  [(ngModel)]="nomeCliente"/>
-    Data de Nascimento: <input type="text"  [(ngModel)]="nascimentoCliente"/>
-    Telefone: <input type="text"  [(ngModel)]="telefoneCliente"/>
-
-
-    <button (click)="cadastrarCliente()"> Salvar </button>
-    <button (click)="cancelarSalvar()"> Cancelar </button>
+    <div class="row">
+        <div class="label">
+            Nome: 
+        </div>
+        <div class="col">
+            <input class="input" type="text"  [(ngModel)]="nomeCliente"/>
+        </div>
+    </div>
+   
+    <div class="row">
+        <div class="label">
+            Data de Nascimento: (dd/mm/yyyy)
+        </div>
+        <div class="col">
+            <input class="input" type="text" [(ngModel)]="nascimentoCliente"/>
+        </div>
+    </div>
+    
+    <div class="row">
+        <div class="label">
+            Telefone: 
+        </div>
+        <div class="col">
+            <input class="input" type="text"  [(ngModel)]="telefoneCliente"/>
+        </div>
+    </div>
+    
+    <div class=" row row-buttons">
+        <button class="button-save" (click)="cadastrarCliente()"> Salvar </button>
+        <button class="button-cancel" (click)="cancelarSalvar()"> Voltar </button>
+    </div>
 </div>

@@ -27,7 +27,6 @@ export class PedidoCadastroComponent implements OnInit{
 
   showErro =  false;
   erroDetalhe = '';
-
   showSucess =  false;
 
   constructor(private router: Router, private clienteService: ClienteService, private produtoService: ProdutosService, private pedidosService: PedidosService) {

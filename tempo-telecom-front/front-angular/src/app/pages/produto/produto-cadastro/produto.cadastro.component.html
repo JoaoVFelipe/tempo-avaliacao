@@ -1,6 +1,38 @@
-<div>
-    Nome: <input type="text"  [(ngModel)]="nomeProduto"/>
-    Valor: <input type="text"  [(ngModel)]="valorProduto"/>
+<h2>Cadastro de Produtos</h2>
 
-    <button (click)="cadastrarProduto()"> Salvar </button>
+<!-- Alerts -->
+<div class="alert" *ngIf="showErro">
+  <span class="closebtn" (click)="dismissErro()">&times;</span>
+  <strong>Ocorreu um erro!</strong> {{erroDetalhe}} 
+</div>
+
+<div class="alert success" *ngIf="showSucess">
+  <span class="closebtn" (click)="dismissSucesso()">&times;</span>  
+  <strong>OK!</strong> Produto salvo com sucesso!
+</div>
+<!-- Alerts -->
+
+<div>
+    <div class="row">
+        <div class="label">
+            Nome:
+        </div>
+        <div class="col">
+            <input class="input" type="text"  [(ngModel)]="nomeProduto"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="label">
+            Valor:
+        </div>
+        <div class="col">
+            <input class="input-valor"  type="text"  [(ngModel)]="valorProduto"/>
+            <strong>  R$  </strong>
+        </div>
+    </div>
+
+    <div class="row row-buttons">
+        <button class="button-save" (click)="cadastrarProduto()"> Salvar </button>
+        <button class="button-cancel" (click)="cancelarSalvar()"> Voltar </button>
+    </div>
 </div>

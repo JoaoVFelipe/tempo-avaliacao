@@ -1,7 +1,7 @@
 -- Executar estas sqls em seu gerenciador de banco de dados para criação da base de dados
 -- e das tabelas necessárias para execução da aplicação
 
--- SCRIPT PARA GERAR DATATABLE
+-- SCRIPT PARA GERAR DATABASE
 
 -- Database: tempo-teste
 
@@ -17,7 +17,6 @@ CREATE DATABASE tempo-teste
 
 -- SCRIPTS PARA GERAR TABELAS
 -- Table: public.clientes
-
 CREATE TABLE public.clientes
 (
     id numeric(20,0) NOT NULL,
@@ -34,7 +33,6 @@ ALTER TABLE public.clientes
 
 
 -- Table: public.produtos
-
 CREATE TABLE public.produtos
 (
     id numeric(20,0) NOT NULL,
@@ -49,9 +47,6 @@ ALTER TABLE public.produtos
     OWNER to postgres;
 
 -- Table: public.pedidos
-
--- DROP TABLE public.pedidos;
-
 CREATE TABLE public.pedidos
 (
     id numeric(20,0) NOT NULL,
@@ -72,9 +67,6 @@ ALTER TABLE public.pedidos
     OWNER to postgres;
 
 -- Table: public.pedidos_x_produtos
-
--- DROP TABLE public.pedidos_x_produtos;
-
 CREATE TABLE public.pedidos_x_produtos
 (
     produto_id numeric(20,0) NOT NULL,

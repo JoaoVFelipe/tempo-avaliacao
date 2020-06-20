@@ -30,12 +30,8 @@ public class ClienteController {
 	
 	@CrossOrigin 
 	@PostMapping(value="/clientes/salvar")
-	public void saveCliente(@RequestBody JSONObject jsonPedido) {
-		try {
-			service.saveCliente(jsonPedido);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Cliente saveCliente(@RequestBody JSONObject jsonCliente) {
+		return service.saveCliente(jsonCliente);
+		
 	}
 }

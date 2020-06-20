@@ -20,21 +20,44 @@ public class ClienteService {
 	@Autowired
 	ClienteRepository repository;
 
+	/**
+	 * Busca todos os clientes
+	 * 
+	 * */
 	@Transactional
 	public ArrayList<Cliente> findAllClientes() {
 		return (ArrayList<Cliente>) repository.findAll();
 	}
 
-	public void saveCliente(JSONObject jsonPedido) throws ParseException {
+	
+	/**
+	 * Salva cliente
+	 * 
+	 * @param jsonCliente
+	 * 				JSONObject com os dados do cliente
+	 * 
+	 * @return cliente salvo em caso de sucesso, ou null em caso de erro
+	 * 
+	 * */
+	public Cliente saveCliente(JSONObject jsonCliente) {
 		Cliente cliente = new Cliente();
-		
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-		Date dataFormatada = formato.parse((String) jsonPedido.get("nascimento"));
-		cliente.setNascimento(dataFormatada);
-		
-		cliente.setNome((String) jsonPedido.get("nome"));
-		cliente.setTelefone((String) jsonPedido.get("telefone"));
-		
-		repository.save(cliente);
+		try {
+			//Formata data de nascimento
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+			Date dataFormatada = formato.parse((String) jsonCliente.get("nascimento"));
+			cliente.setNascimento(dataFormatada);
+			
+			//Seta nome e telefone
+			cliente.setNome((String) jsonCliente.get("nome"));
+			cliente.setTelefone((String) jsonCliente.get("telefone"));
+			
+			//Salva
+			return repository.save(cliente);
+		} 
+		catch (ParseException e) {
+			e.printStackTrace();
+			return null;
+		}
+
 	}
 }

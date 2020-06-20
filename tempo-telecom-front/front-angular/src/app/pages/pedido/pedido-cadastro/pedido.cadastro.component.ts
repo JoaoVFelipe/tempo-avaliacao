@@ -100,6 +100,7 @@ export class PedidoCadastroComponent implements OnInit{
 
   limpaPedido(){
     this.clientePedido = null;
+    this.produtoSelecionado = null;
     this.produtoListPedido = [];
     this.valorPedido = 0;
   }

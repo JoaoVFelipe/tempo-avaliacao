@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ClienteService } from 'src/app/services/cliente.service';
 import { Cliente } from 'src/app/models/cliente';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-cliente',
@@ -10,7 +11,7 @@ import { Cliente } from 'src/app/models/cliente';
 export class ClienteComponent implements OnInit{
   listaClientes: Cliente[] = [];
 
-  constructor(private clienteService: ClienteService) {
+  constructor(private router: Router, private clienteService: ClienteService) {
   }
 
   ngOnInit() {
@@ -28,7 +29,7 @@ export class ClienteComponent implements OnInit{
   }
 
   abrirPaginaCadastro(){
-
+    this.router.navigate(['/clientes/cadastro'])
   }
 }
 

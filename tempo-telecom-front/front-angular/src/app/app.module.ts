@@ -13,6 +13,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import { PedidoCadastroComponent } from './pages/pedido/pedido-cadastro/pedido.cadastro.component';
 import { ProdutoComponent } from './pages/produto/produto.component';
+import { ClienteCadastroComponent } from './pages/cliente/cliente-cadastro/cliente.cadastro.component';
+import { ProdutoCadastroComponent } from './pages/produto/produto-cadastro/produto.cadastro.component';
 
 
 @NgModule({
@@ -23,6 +25,8 @@ import { ProdutoComponent } from './pages/produto/produto.component';
     ClienteComponent,
     PedidoComponent,
     ProdutoComponent,
+    ClienteCadastroComponent,
+    ProdutoCadastroComponent,
     PedidoCadastroComponent
   ],
   imports: [

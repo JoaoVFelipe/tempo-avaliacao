@@ -1,1 +1,9 @@
-cliente-cadastro
+<div>
+    Nome: <input type="text"  [(ngModel)]="nomeCliente"/>
+    Data de Nascimento: <input type="text"  [(ngModel)]="nascimentoCliente"/>
+    Telefone: <input type="text"  [(ngModel)]="telefoneCliente"/>
+
+
+    <button (click)="cadastrarCliente()"> Salvar </button>
+    <button (click)="cancelarSalvar()"> Cancelar </button>
+</div>

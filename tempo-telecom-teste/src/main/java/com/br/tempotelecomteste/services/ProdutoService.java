@@ -36,7 +36,7 @@ public class ProdutoService {
 		Produto produto = new Produto();
 		
 		produto.setNome((String) jsonPedido.get("nome"));
-		produto.setValor((Double) jsonPedido.get("valor"));
+		produto.setValor(Double.valueOf((String) jsonPedido.get("valor")));
 
 		repository.save(produto);
 	}

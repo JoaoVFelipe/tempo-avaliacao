@@ -16,12 +16,24 @@ export class ClienteService {
         this.url = environment.BASE_URL;
     }
 
+    // Headers
+    httpOptions = {
+        headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+    }
+
     // Obtem todos os clientes
     getClientes(): Observable<any[]> {
         return this.httpClient.get<any>(this.url + "/clientes/all")
         .pipe(
           retry(2),
           catchError(this.handleError))
+    }
+
+    // Salva produtos
+    salvarClientes(cliente: Cliente): Observable<Cliente> {
+        return this.httpClient.post<Cliente>(this.url + "/clientes/salvar", JSON.stringify(cliente), this.httpOptions)
+        .pipe(
+            catchError(this.handleError))
     }
 
     // Manipulação de erros

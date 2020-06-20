@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-top-menu',
@@ -6,6 +7,10 @@ import { Component } from '@angular/core';
   styleUrls: ['top.menu.component.css']
 })
 export class TopMenuComponent {
-  constructor() {
+  constructor(private router: Router) {
+  }
+
+  backToStart(){
+    this.router.navigate(['/']);
   }
 }

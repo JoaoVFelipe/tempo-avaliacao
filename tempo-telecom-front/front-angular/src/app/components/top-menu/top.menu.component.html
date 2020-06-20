@@ -1,14 +1,14 @@
 <div class="toolbar" role="banner">
-    <span style="margin-left: 10px;"> Sistema de Pedidos </span>
+    <span class="title" (click)="backToStart()"> <strong> Sistema de Pedidos </strong> </span>
   
-    <div class="menu-itens"> 
+    <div class="menu"> 
         <nav>
-            <a routerLink="/clientes">Clientes</a>
-            <a routerLink="/produtos">Produtos</a>
-            <a routerLink="/pedidos">Pedidos</a>
+            <a class="menu-itens" routerLink="/clientes">Clientes</a>
+            <a class="menu-itens" routerLink="/produtos">Produtos</a>
+            <a class="menu-itens" routerLink="/pedidos">Pedidos</a>
         </nav>
     </div>
   
     <div class="spacer"></div>
-    João Vitor
+        <span class="username">João Vitor</span>
 </div>

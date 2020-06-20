@@ -1,10 +1,11 @@
 -- Executar estas sqls em seu gerenciador de banco de dados para criação da base de dados
 -- e das tabelas necessárias para execução da aplicação
 
+-- SCRIPT PARA GERAR DATATABLE
 
--- Script de criação da database: tempo-teste
+-- Database: tempo-teste
 
-CREATE DATABASE "tempo-teste"
+CREATE DATABASE tempo-teste
     WITH 
     OWNER = postgres
     ENCODING = 'UTF8'
@@ -13,11 +14,8 @@ CREATE DATABASE "tempo-teste"
     TABLESPACE = pg_default
     CONNECTION LIMIT = -1;
 
--- Fim do script de criação da database
 
-
--- Scripts de geração de tabelas
-
+-- SCRIPTS PARA GERAR TABELAS
 -- Table: public.clientes
 
 CREATE TABLE public.clientes

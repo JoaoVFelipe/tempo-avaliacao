@@ -10,12 +10,12 @@ Este projeto foi desenvolvido utilizando a arquitetura Maven com Java (1.8) para
 Para instalação do projeto, deve se seguir os seguintes passos:
 
 ### Inicialização do Banco de dados:
-* Executar o script de criação da database, encontrado no arquivo 'script-banco.txt' no gerenciador de BD de sua escolha (PgAdmin4 ou outro gerenciador que suporte PostgreSQL);
-* Dentro da database, executar os demais scripts de criação de tabelas, encontrados no mesmo arquivo.
+* Executar o script de criação da base de dados encontrado no arquivo 'script-banco.txt' em seu gerenciador de BD de escolha (que suporte PostgreSQL) ou criar uma base de dados manualmente;
+* Executar os scripts de criação de tabelas encontrados no arquivo 'script-banco.txt' dentro da base de dados e aguardar a criação das tabelas;
 
 ### Inicialização do servidor Back-end:
-* Importar o projeto presente na pasta 'tempo-telecom-teste' em sua IDE de escolha;
-* Dentro do diretório src/main/resources, alterar o arquivo application.properties de acordo com a configuração feita no PgAdmin4 (nome e endereço da base de dados, username e password)
+* Importar o projeto Maven presente na pasta 'tempo-telecom-teste' em sua IDE de escolha;
+* Dentro do diretório src/main/resources, alterar o arquivo application.properties de acordo com as configurações da base de dados criada (nome e endereço da base de dados, username e password)
 * Buildar o projeto utilizando o Maven Build (varia de acordo com a IDE) e aguardar a instalação das dependências necessárias;
 * Após o build, executar a aplicação a partir da classe 'TempoTelecomTesteApplication.java' e aguardar a inicialização do servidor Tomcat.
 

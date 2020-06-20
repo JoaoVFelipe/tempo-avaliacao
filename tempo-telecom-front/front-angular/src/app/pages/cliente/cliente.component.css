@@ -1,0 +1,54 @@
+.title{
+    font-weight: bold;
+    font-size: 25px;
+    padding-left: 20px;
+}
+
+.card{
+    border: 1px solid #333333;
+    box-shadow: 3px 3px 15px;
+    border-radius: 10px;
+    margin: 10px;
+    width: 1000px;
+    padding: 10px;
+}
+
+.row{
+    display: flex;
+}
+
+.row-button{
+    text-align: right;
+    padding-right: 20px;
+    margin-bottom: 20px;
+}
+
+.button-new{
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #1976D1;
+    color: white;
+    border: none;
+}
+
+.card-header{
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+    padding: 5px;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+.col{
+    flex: 1;
+}
+
+.nascimento{
+    padding-left: 10px;
+}
+
+.telefone{
+    text-align: right;
+    padding-right: 10px;
+}

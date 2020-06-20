@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import {DropdownModule} from 'primeng/dropdown';
 import { PedidoCadastroComponent } from './pages/pedido/pedido-cadastro/pedido.cadastro.component';
+import { ProdutoComponent } from './pages/produto/produto.component';
 
 
 @NgModule({
@@ -21,6 +22,7 @@ import { PedidoCadastroComponent } from './pages/pedido/pedido-cadastro/pedido.c
     HomeComponent,
     ClienteComponent,
     PedidoComponent,
+    ProdutoComponent,
     PedidoCadastroComponent
   ],
   imports: [
@@ -29,8 +31,7 @@ import { PedidoCadastroComponent } from './pages/pedido/pedido-cadastro/pedido.c
     HttpClientModule,
     BrowserAnimationsModule,
     FormsModule,
-    ReactiveFormsModule,
-    DropdownModule
+    ReactiveFormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

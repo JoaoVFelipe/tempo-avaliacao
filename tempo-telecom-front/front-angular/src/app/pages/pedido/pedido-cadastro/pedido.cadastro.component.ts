@@ -64,7 +64,9 @@ export class PedidoCadastroComponent implements OnInit{
       id: null,
       cliente: this.clientePedido,
       produtos: this.produtoListPedido,
-      valor: this.valorPedido
+      valor: this.valorPedido,
+      data: '',
+      hora: ''
     } ;
     this.salvarPedido(pedido);
   }

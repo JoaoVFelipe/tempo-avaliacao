@@ -1,1 +1,22 @@
-produto-work
+<div class="row ">
+    <div class="col">
+        <span class="title"> Produtos </span>
+    </div>
+   
+    <div class="col row-button">
+        <button class="button-new" (click)="abrirPaginaCadastro()">
+            <span> Novo Produto </span>
+        </button>
+    </div>
+</div>
+
+<div class="card" *ngFor="let produto of listaProdutos">
+    <div class="row">
+        <div class="col nome">
+            {{produto.id}} - {{produto.nome}}
+        </div>    
+        <div class="col valor">
+            Valor: R$ {{produto.valor}}
+        </div>   
+    </div>
+</div>

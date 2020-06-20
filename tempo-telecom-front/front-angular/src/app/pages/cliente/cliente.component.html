@@ -1,9 +1,27 @@
-Clientes
+<div class="row ">
+    <div class="col">
+        <span class="title"> Clientes </span>
+    </div>
+   
+    <div class="col row-button">
+        <button class="button-new" (click)="abrirPaginaCadastro()">
+            <span> Novo Cliente </span>
+        </button>
+    </div>
+</div>
 
-<div class="row card-group">
-    <div class="col-4"  *ngFor="let cliente of listaClientes">
-        <div class="card">
-            <span>{{cliente.nome}}</span>
+<div class="card" *ngFor="let cliente of listaClientes">
+    <div class="row card-header">
+        <div class="col">
+            {{cliente.id}} - {{cliente.nome}}
+        </div>    
+    </div>
+    <div class="row">
+        <div class="col nascimento">
+            Nascimento: {{cliente.dataFormatada}}
+        </div>
+        <div class="col telefone">
+            Telefone: {{cliente.telefone}}
         </div>
     </div>
 </div>

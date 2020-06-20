@@ -1,18 +1,31 @@
+<div class="row">
+    <div class="col">
+        <span class="title"> Pedidos </span>
+    </div>
+   
+    <div class="col row-button">
+        <button class="button-new" (click)="abrirPaginaCadastro()">
+            <span>Novo Pedido</span>
+        </button>
+    </div>
+</div>
+
+
 <div class="card" *ngFor="let pedido of listaPedidos">
-    <div class="row">
+    <div class="row card-header">
         <div class="col">
-            Pedido {{pedido.id}} - {{pedido.cliente.nome}} ROMULO TOPSTER
+            Pedido {{pedido.id}} - {{pedido.cliente.nome}}
         </div>    
-        <div class="col">
+        <div class="col data">
             {{pedido.data}} - {{pedido.hora}}
         </div>
     </div>
     <div class="row table">
         <table>
             <tr>
-              <th>Id</th>
-              <th>Produto</th>
-              <th>Valor</th>
+              <th class="headerId">Id</th>
+              <th class="headerProduto">Produto</th>
+              <th class="headerValor">Valor</th>
             </tr>
             <tr *ngFor="let produto of pedido.listaProdutos">
               <td>{{produto.id}}</td>
@@ -21,13 +34,9 @@
             </tr>
         </table>
     </div>
-    <div class="row">
+    <div class="row card-footer">
         <div class="col">
             Valor total: {{pedido.valor}}
         </div>
     </div>
 </div>
-
-<button (click)="abrirPaginaCadastro()">
-    <span>Novo Pedido</span>
-</button>

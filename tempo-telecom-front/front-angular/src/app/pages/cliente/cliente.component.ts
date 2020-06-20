@@ -20,8 +20,15 @@ export class ClienteComponent implements OnInit{
   // Chama o serviço para obter todos os clientes
   getClientes() {
     this.clienteService.getClientes().subscribe((clientes: Cliente[]) => {
-      this.listaClientes = clientes;
+      this.listaClientes =  clientes.map(cliente => {
+        cliente.dataFormatada = new Date(cliente.nascimento).toDateString();
+        return cliente;
+      })
     });
+  }
+
+  abrirPaginaCadastro(){
+
   }
 }
 

@@ -18,7 +18,10 @@ export class PedidoComponent {
   // Chama o serviço para obter todos os clientes
   getPedidos() {
     this.pedidoService.getPedidos().subscribe((pedidos: Pedido[]) => {
-      this.listaPedidos = pedidos;
+      this.listaPedidos = pedidos.map(pedido => {
+        pedido.data = new Date(pedido.data).toDateString();
+        return pedido;
+      })
     });
   }
 

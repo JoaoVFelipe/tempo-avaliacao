@@ -8,10 +8,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
@@ -22,6 +20,8 @@ import com.br.tempotelecomteste.entidades.produto.Produto;
 @Entity
 @Table(name="PEDIDOS")
 public class Pedido implements Serializable{
+	private static final long serialVersionUID = 3040249433965315189L;
+
 	@Id
 	@GeneratedValue
 	private Long id;

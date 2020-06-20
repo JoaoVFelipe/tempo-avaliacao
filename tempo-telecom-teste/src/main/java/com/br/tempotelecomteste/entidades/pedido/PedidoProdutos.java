@@ -4,10 +4,7 @@ import java.io.Serializable;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.IdClass;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 import javax.persistence.Table;
@@ -24,12 +21,12 @@ public class PedidoProdutos implements Serializable{
 	private PedidoId id;
 	
 	
-    @MapsId("produtoId") //references EmbeddedId's property
+    @MapsId("produtoId")
     @JoinColumn(name="PRODUTO_ID", referencedColumnName = "id")
     @ManyToOne
 	private Produto produto;
     
-    @MapsId("pedidoId") //references EmbeddedId's property
+    @MapsId("pedidoId")
     @JoinColumn(name="PEDIDO_ID", referencedColumnName = "id")
     @ManyToOne
 	private Pedido pedido;

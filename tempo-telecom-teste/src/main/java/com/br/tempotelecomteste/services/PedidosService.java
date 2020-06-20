@@ -7,11 +7,10 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.LinkedHashMap;
-import java.util.Optional;
+import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +23,6 @@ import com.br.tempotelecomteste.entidades.produto.Produto;
 import com.br.tempotelecomteste.repositorios.PedidoProdutosRepository;
 import com.br.tempotelecomteste.repositorios.PedidoRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.jsonFormatVisitors.JsonArrayFormatVisitor;
 
 @Service
 public class PedidosService {
@@ -35,38 +33,81 @@ public class PedidosService {
 	@Autowired
 	PedidoProdutosRepository pedidoProdutosRepository;
 	
+	@Autowired
+	ProdutoService produtoService;
+	
+	/**
+	 * Busca todos os pedidos  e todos os produtos relacionados a cada pedido
+	 * 
+	 * */
 	@Transactional
 	public ArrayList<Pedido> findAllPedidos() {
-		return (ArrayList<Pedido>) repository.findAll();
+		//Busca todos os pedidos
+		ArrayList<Pedido> listaPedidos = (ArrayList<Pedido>) repository.findAll();
+		//Busca todos os PedidoProduto
+		ArrayList<PedidoProdutos> listaPedidoProdutos = this.findAllPedidosProdutos();
+		
+		//Para cada pedido
+		listaPedidos.forEach(pedido -> {
+			//Seta a lista de produtos
+			pedido.setListaProdutos((ArrayList<Produto>) listaPedidoProdutos.stream().
+					//Se o id do pedido for o mesmo em pedido e em pedidoProduto
+					filter(pedidoProduto -> 
+						pedidoProduto.getPedido().getId().equals(pedido.getId()))
+					//Com os dados de produto encontrado na busca
+					.map(pedidoProduto ->
+						produtoService.findById(pedidoProduto.getProduto().getId()).orElse(null))
+				.collect(Collectors.toList()));
+		});
+		return listaPedidos;
 	}
 	
-	@Transactional
-	public Optional<PedidoProdutos> findPedidoProdutoById(PedidoId id) {
-		return pedidoProdutosRepository.findById(id);
-	}
-	
+
+	/**
+	 * Busca todos os pedidosxProdutos
+	 * 
+	 * */
 	@Transactional
 	public ArrayList<PedidoProdutos> findAllPedidosProdutos() {
 		return (ArrayList<PedidoProdutos>) pedidoProdutosRepository.findAll();
 	}
 	
+	/**
+	 * Salva pedido
+	 * 
+	 * @param jsonPedido
+	 * 				JSONObject com os dados do pedido
+	 * 
+	 * @return pedido salvo em caso de sucesso, ou null em caso de erro
+	 * 
+	 * */
 	@Transactional
-	public Pedido salvarPedido(JSONObject jsonPedido) throws ParseException {
+	public Pedido salvarPedido(JSONObject jsonPedido) {
 		Pedido pedido = new Pedido();
-		
-		LocalDate now = LocalDate.now(); 
-		SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
-		Date dataFormatada = formato.parse(String.valueOf(now.getDayOfMonth()) + "/" + String.valueOf(now.getMonthValue()) + "/"+ String.valueOf(now.getYear())); 
-		pedido.setData(dataFormatada);
-		
-		LocalTime nowTime = LocalTime.now();
-		pedido.setHora(String.valueOf(nowTime.getHour()) + ":" + String.valueOf(nowTime.getMinute()));
-		
-		pedido.setValor((Double) jsonPedido.get("valor"));
-		
-		ObjectMapper mapper = new ObjectMapper();
-		pedido.setCliente(mapper.convertValue(jsonPedido.get("cliente"), Cliente.class));
-		return repository.save(pedido);
+		try {
+			//Busca data atual do sistema e a formata
+			LocalDate now = LocalDate.now(); 
+			SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy"); 
+			Date dataFormatada = formato.parse(String.valueOf(now.getDayOfMonth()) + "/" + String.valueOf(now.getMonthValue()) + "/"+ String.valueOf(now.getYear()));
+			pedido.setData(dataFormatada);
+			
+			//Busca hora atual do sistema e a formata
+			LocalTime nowTime = LocalTime.now();
+			pedido.setHora(String.valueOf(nowTime.getHour()) + ":" + String.valueOf(nowTime.getMinute()));
+			
+			//Seta valor
+			pedido.setValor(Double.valueOf(String.valueOf(jsonPedido.get("valor"))));
+			
+			//Seta Cliente
+			ObjectMapper mapper = new ObjectMapper();
+			pedido.setCliente(mapper.convertValue(jsonPedido.get("cliente"), Cliente.class));
+			
+			//Salva Pedido
+			return repository.save(pedido);
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return null; 
 	}
 	
 	@Transactional
@@ -76,19 +117,23 @@ public class PedidosService {
 		ArrayList<PedidoProdutos> listPedidoProduto = new ArrayList<>();
 		ArrayList<LinkedHashMap> listProdutos = (ArrayList<LinkedHashMap>) jsonPedido.get("produtos");
 		
-		listProdutos.forEach(jsonProduto -> {
-			PedidoProdutos pedidoProdutos = new PedidoProdutos();
-			Produto produto = mapper.convertValue(jsonProduto, Produto.class);
-			PedidoId pedidoId = new PedidoId(pedido.getId(), produto.getId());
+		if(pedido != null) {
+			listProdutos.forEach(jsonProduto -> {
+				PedidoProdutos pedidoProdutos = new PedidoProdutos();
+				Produto produto = mapper.convertValue(jsonProduto, Produto.class);
+				PedidoId pedidoId = new PedidoId(pedido.getId(), produto.getId());
+				
+				pedidoProdutos.setId(pedidoId);
+				pedidoProdutos.setPedido(pedido);
+				pedidoProdutos.setProduto(produto);
+				
+				listPedidoProduto.add(pedidoProdutos);
+			});
 			
-			pedidoProdutos.setId(pedidoId);
-			pedidoProdutos.setPedido(pedido);
-			pedidoProdutos.setProduto(produto);
-			
-			listPedidoProduto.add(pedidoProdutos);
-		});
+			pedidoProdutosRepository.saveAll(listPedidoProduto);
+		}
 		
-		pedidoProdutosRepository.saveAll(listPedidoProduto);
+		
 		
 	}
 

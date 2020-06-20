@@ -1,0 +1,112 @@
+.row{
+    display: flex;
+    margin-top: 10px;
+}
+
+.col{
+    flex: 1;
+}
+
+.label{
+    width: 150px;
+    margin-top: 3px;
+}
+
+.select-cliente{
+    min-width: 350px;
+}
+
+.select-produto{
+    min-width: 250px;
+    margin-right: 20px;
+}
+
+.input-valor{
+    min-width: 300px;
+    margin-right: 20px;
+}
+
+.button-add{
+    padding: 7px;
+    border-radius: 5px;
+    background-color: #1976D1;
+    color: white;
+    border: none;
+}
+
+
+.table{
+    margin-left: 20%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    display: flex;
+    text-align: left;
+}
+
+th, td {
+    border-bottom: 1px solid #ddd;
+}
+
+.headerId{
+    min-width: 50px;
+}
+
+.headerProduto{
+    min-width: 200px;
+}
+
+.headerValor{
+    min-width: 50px;
+}
+
+.row-buttons{
+    margin-left: 35%;
+    margin-top: 20px;
+}
+
+.button-save{
+    background-color: #1976d2;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    margin-right: 20px;
+}
+
+.button-cancel{
+    background-color: #f44336;
+    color: white;
+    font-weight: bold;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+/* Alertas */
+.alert {
+    padding: 20px;
+    background-color: #f44336;
+    color: white;
+    margin-bottom: 15px;
+}
+
+.alert.success {background-color: #4CAF50;}
+
+.closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+
+.closebtn:hover {
+    color: black;
+}

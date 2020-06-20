@@ -6,6 +6,7 @@ import { Cliente } from 'src/app/models/cliente';
 import { Produto } from 'src/app/models/produto';
 import { Pedido } from 'src/app/models/pedido';
 import { PedidosService } from 'src/app/services/pedidos.service';
+import { Router } from '@angular/router';
 
 
 
@@ -24,7 +25,12 @@ export class PedidoCadastroComponent implements OnInit{
   produtoListPedido: Produto[] = [];
   valorPedido: number;
 
-  constructor(private clienteService: ClienteService, private produtoService: ProdutosService, private pedidosService: PedidosService) {
+  showErro =  false;
+  erroDetalhe = '';
+
+  showSucess =  false;
+
+  constructor(private router: Router, private clienteService: ClienteService, private produtoService: ProdutosService, private pedidosService: PedidosService) {
     this.getClientes();
     this.getProdutos();
   }
@@ -47,8 +53,10 @@ export class PedidoCadastroComponent implements OnInit{
 
   adicionarProduto(){
     if(this.produtoSelecionado){
-      this.produtoListPedido.push(this.produtoSelecionado);
-      this.calcValorPedido();
+      if(this.produtoListPedido.findIndex(produto => produto.id == this.produtoSelecionado.id) < 0){
+        this.produtoListPedido.push(this.produtoSelecionado);
+        this.calcValorPedido();
+      };
     }
   }
 
@@ -72,7 +80,43 @@ export class PedidoCadastroComponent implements OnInit{
   }
 
   salvarPedido(pedido){
-    this.pedidosService.salvarPedido(pedido).subscribe((clientes) => {
-    });
+    this.pedidosService.salvarPedido(pedido).subscribe( 
+      (pedido) => {
+        if(pedido != null){
+          this.showSucessBar();
+        }
+        else{
+          this.showErroBar("Erro ao tentar salvar o pedido. Verifique os campos e tente novamente");
+        }
+      },
+        (error) => this.showErroBar("Erro ao tentar salvar o pedido. " + error)
+      );
+  }
+
+  cancelarCadastro(){
+    this.clientePedido = null;
+    this.produtoListPedido = [];
+    this.valorPedido = 0;
+    this.router.navigate(['/pedidos'])
+  }
+
+  showSucessBar(){
+    this.dismissErro();
+    this.showSucess = true;
+  }
+
+  dismissSucesso(){
+    this.showSucess = false;
+  }
+
+  showErroBar(detalhe){
+    this.dismissSucesso();
+    this.showErro = true;
+    this.erroDetalhe = detalhe;
+  }
+
+  dismissErro(){
+    this.showErro = false;
+    this.erroDetalhe = "";
   }
 }

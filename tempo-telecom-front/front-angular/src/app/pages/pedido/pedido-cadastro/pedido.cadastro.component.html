@@ -1,22 +1,77 @@
   
-  <h2>Cadastro de Pedidos</h2>
-  
+<h2>Cadastro de Pedidos</h2>
 
-    <select [(ngModel)]="clientePedido">
-        <option>Selecione um cliente: </option>
-        <option *ngFor="let cliente of clientesList" [ngValue]="cliente">{{cliente.nome}}</option>
+<!-- Alerts -->
+<div class="alert" *ngIf="showErro">
+  <span class="closebtn" (click)="dismissErro()">&times;</span>
+  <strong>Ocorreu um erro!</strong> {{erroDetalhe}} 
+</div>
+
+<div class="alert success" *ngIf="showSucess">
+  <span class="closebtn" (click)="dismissSucesso()">&times;</span>  
+  <strong>OK!</strong> Pedido salvo com sucesso!
+</div>
+<!-- Alerts -->
+<!-- Form -->
+<div class="row">
+  <div class="label">
+    Cliente:
+  </div>
+
+  <div class="col">
+    <select class="select-cliente" [(ngModel)]="clientePedido"> 
+      <option>Selecione um Cliente: </option>
+      <option *ngFor="let cliente of clientesList" [ngValue]="cliente">{{cliente.nome}}</option>
+    </select>
+  </div>
+</div>
+
+<div class="row">
+  <div class="label">
+    Produtos: 
+  </div>
+
+  <div class="col">
+    <select class="select-produto" [(ngModel)]="produtoSelecionado">
+      <option>Selecione um produto: </option>
+      <option *ngFor="let produto of produtoList" [ngValue]="produto">{{produto.nome}}</option>
     </select>
 
-    <select [(ngModel)]="produtoSelecionado">
-        <option>Selecione um produto: </option>
-        <option *ngFor="let produto of produtoList" [ngValue]="produto">{{produto.nome}}</option>
-    </select>
+    <button class="button-add" (click)="adicionarProduto()">Adicionar</button>
+  </div>
+</div>
 
-    <button (click)="adicionarProduto()">Adicionar Produto</button>
+<div class="row table">
+  <table>
+      <tr>
+        <th class="headerId">Id</th>
+        <th class="headerProduto">Produto</th>
+        <th class="headerValor">Valor</th>
+      </tr>
+      <tr *ngFor="let produto of produtoListPedido">
+        <td>{{produto.id}}</td>
+        <td>{{produto.nome}}</td>
+        <td>R$ {{produto.valor}}</td>
+      </tr>
+  </table>
+</div>
 
-    <input type="text"  [(ngModel)]="valorPedido" disabled/>
+<div class="row">
+  <div class="label">
+    <strong>Valor total: </strong> 
+  </div>
 
-    <button (click)="cadastrarPedido()">Adicionar Pedido</button>
+  <div class="col">
+    <input class="input-valor" type="text"  [(ngModel)]="valorPedido" disabled/>
+    <strong>  R$  </strong>
+  </div>
+</div>
+
+<div class="row row-buttons">
+  <button class="button-save" (click)="cadastrarPedido()">Salvar</button>
+  <button class="button-cancel" (click)="cancelarCadastro()">Cancelar</button>
+</div>
+
 
   
    

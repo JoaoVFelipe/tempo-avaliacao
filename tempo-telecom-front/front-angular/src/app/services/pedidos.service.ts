@@ -25,9 +25,6 @@ export class PedidosService {
     // Obtem todos os pedidos
     getPedidos(): Observable<any[]> {
         return this.httpClient.get<any>(this.url + "/pedidos/all")
-        .pipe(
-          retry(2),
-          catchError(this.handleError))
     }
 
     // Salva pedidos
@@ -46,7 +43,7 @@ export class PedidosService {
             errorMessage = error.error.message;
         } else {
             // Erro ocorreu no lado do servidor
-            errorMessage = `Código do erro: ${error.status}, ` + `menssagem: ${error.message}`;
+            errorMessage = `${error.status}` + `: ${error.message}`;
         }
         console.log(errorMessage);
         return throwError(errorMessage);

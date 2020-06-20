@@ -28,12 +28,7 @@ public class ProdutoController {
 	
 	@CrossOrigin 
 	@PostMapping(value="/produtos/salvar")
-	public void saveProduto(@RequestBody JSONObject jsonPedido) {
-		try {
-			service.saveProduto(jsonPedido);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	public Produto saveProduto(@RequestBody JSONObject jsonPedido) {
+		return service.saveProduto(jsonPedido);
 	}
 }

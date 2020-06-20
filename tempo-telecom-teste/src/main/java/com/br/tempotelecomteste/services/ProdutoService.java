@@ -22,22 +22,45 @@ public class ProdutoService {
 	@Autowired
 	ProdutoRepository repository;
 	
+	/**
+	 * Busca todos os produtos para listagem
+	 * 
+	 * */
 	@Transactional
 	public ArrayList<Produto> findAllProdutos() {
 		return (ArrayList<Produto>) repository.findAll();
 	}
 
+	/**
+	 * Busca todos produto a partir do id
+	 * 
+	 * @param id
+	 * 				ID do produto
+	 * 
+	 * @return Um Optional de produto
+	 * 
+	 * */
 	public Optional<Produto> findById(Long id) {
 		return repository.findById(id);
 		
 	}
-
-	public void saveProduto(JSONObject jsonPedido) throws ParseException {
+	
+	/**
+	 * Salva produto
+	 * 
+	 * @param jsonProduto
+	 * 				JSONObject com os dados do produto
+	 * 
+	 * @return produto salvo em caso de sucesso, ou null em caso de erro
+	 * 
+	 * */
+	@Transactional
+	public Produto saveProduto(JSONObject jsonProduto) {
 		Produto produto = new Produto();
 		
-		produto.setNome((String) jsonPedido.get("nome"));
-		produto.setValor(Double.valueOf((String) jsonPedido.get("valor")));
+		produto.setNome((String) jsonProduto.get("nome"));
+		produto.setValor(Double.valueOf((String) jsonProduto.get("valor")));
 
-		repository.save(produto);
+		return repository.save(produto);
 	}
 }
